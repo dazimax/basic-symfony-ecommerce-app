@@ -1,0 +1,203 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Books Store{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="container">
+    <div class="row mt-5 justify-content-center">
+        <h2>Checkout</h2>
+    </div>
+    <div class="row mt-3">
+        <form class="col-12" id="checkout-form">
+            <div class="col-6">
+                <h4 class="mb-3">User Details</h4>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>&nbsp;<span class="red">*</span>
+                        <input type="text" class="form-control" id="first-name" name="first_name" placeholder="Your First Name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>&nbsp;<span class="red">*</span>
+                        <input type="text" class="form-control" id="last-name" name="last_name" placeholder="Your Last Name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">Mobile</label>&nbsp;<span class="red">*</span>
+                        <input type="number" maxlength="10" class="form-control" id="mobile" name="mobile_no" placeholder="Your Mobile Number"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>&nbsp;<span class="red">*</span>
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Your Email Address"/>
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>&nbsp;<span class="red">*</span>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Your Account Password"/>
+                    </div>
+                </div>
+                <h4 class="mb-3">Delivery / Billing Details</h4>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="address-line-1">Address Line 1</label>&nbsp;<span class="red">*</span>
+                        <input type="text" class="form-control" id="address-line-1" name="address_line_1" placeholder="Your Address Line 1"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="address-line-2">Address Line 2</label>&nbsp;<span class="red">*</span>
+                        <input type="text" class="form-control" id="address-line-2" name="address_line_2" placeholder="Your Address Line 2"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>&nbsp;<span class="red">*</span>
+                        <select class="form-control" id="country" name="country">
+                            <option value="Sri Lanka">Sri Lanka</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State / Province</label>&nbsp;<span class="red">*</span>
+                        <input type="text" class="form-control" id="state" name="state" placeholder="Your State or Province"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-code">Post Code</label>&nbsp;<span class="red">*</span>
+                        <input type="number" maxlength="10" class="form-control" id="post-code" name="post_code" placeholder="Your Post Code"/>
+                    </div>
+                    <div class="form-group">
+                        <b><label><span class="red">*</span> All fields are mandatory</label></b>
+                    </div>
+                </div>    
+            </div>
+            <div class="col-6">
+                <h4 class="mb-3">Cart Summary</h4>
+                <div class="row col-12">
+                    <div class="col-lg-12 mt-1 col-sm-12">
+                        <div class="row justify-content-center">
+                            <div class="card cart-item cart-item-header box-shadow mb-3 col-12">
+                                <div class="row no-gutters">
+                                    <div class="col-12">
+                                        <div class="card-body">
+                                            <div class="col-5">
+                                                <label>Book Name</label>
+                                            </div>
+                                            <div class="col-2 justify-content-center">
+                                                <label>Price</label>
+                                            </div>
+                                            <div class="col-2 justify-content-center">
+                                                <label>Quantity</label>
+                                            </div>
+                                            <div class="col-3 justify-content-center">
+                                                <label>Line Total</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% if cartItems is not empty %}
+                        {% for product in cartItems.cart_items %}
+                            <div id="cart-book-{{ product.product_id }}" class="card cart-item box-shadow mb-3 col-12">
+                                <div class="row no-gutters">
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                            <div class="col-5">
+                                                <a class="cart-book-title" href="{{ path('product_show', {'id': product.product_id}) }}">
+                                                    <h6 class="card-title">{{ product.product_name }}</h6>
+                                                </a>
+                                            </div>
+                                            <div class="col-2 justify-content-center">
+                                                <label><b>{{ product.product_price }}</b></label>
+                                            </div>
+                                            <div class="col-2 justify-content-center">
+                                                <label><b>{{ product.qty }}</b></label>
+                                            </div>
+                                            <div class="col-3 justify-content-center">
+                                                <label><b>{{ product.line_total }}</b></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                            <div class="card cart-item cart-item-header box-shadow mb-3 col-12">
+                                <div class="row no-gutters">
+                                    <div class="col-md-12">
+                                        <div class="card-body no-padding-bottom">
+                                            <div class="row col-12 summary-details">
+                                                <div class="col-6 summary-title">
+                                                    <label>Total Amount ($)</label>
+                                                </div>
+                                                <div class="col-3 summary-amount">
+                                                    <label id="cart-total-amount">{{ cartItems.cart_summary.total_amount }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body no-padding-top no-padding-bottom">    
+                                            <div class="row col-12 summary-details">
+                                                <div class="col-6 summary-title">
+                                                    <label>Discount ($)</label>
+                                                </div>
+                                                <div class="col-3 summary-amount">
+                                                    <label id="cart-total-discount">{{ cartItems.cart_summary.total_discount }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body no-padding-top ">    
+                                            <div class="row col-12 summary-details">
+                                                <div class="col-6 summary-title">
+                                                    <label>Sub-Total Amount ($)</label>
+                                                </div>
+                                                <div class="col-3 summary-amount">
+                                                    <label id="cart-sub-total-amount">{{ cartItems.cart_summary.sub_total_amount }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="coupon-box" class="card-body no-padding-top ">    
+                                            <div class="row col-12 summary-coupon">
+                                                <div class="col-7">
+                                                    <input type="text" class="form-control" id="coupon" name="coupon" placeholder="Add your Coupon"/>
+                                                </div>
+                                                <div class="col-5">
+                                                    <a href="/applycoupon" data-token="{{ csrf_token('coupon') }}" id="apply-coupon-button" class="btn btn-secondary">Apply Coupon</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="coupon-applied-box" class="card-body no-padding-top ">    
+                                            <div class="row col-12 summary-coupon">
+                                                {% if cartItems.cart_summary.is_coupon_applied %}
+                                                    <label id="applied-coupon-success" class="alert alert-success d-block">
+                                                        {{ cartItems.cart_summary.coupon_message }}
+                                                    </label>
+                                                    <button type="button" class="close cart-coupon-remove-button d-block" aria-label="Close">
+                                                        Remove applied coupon <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                {% else %}
+                                                    <label id="applied-coupon-success" class="alert alert-success">
+                                                        Your coupon code successfully applied.
+                                                    </label>
+                                                    <button type="button" class="close cart-coupon-remove-button d-none" aria-label="Close">
+                                                        Remove applied coupon <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                {% endif %}
+                                                <label id="applied-coupon-danger" class="alert alert-danger">Invalid coupon applied. Please review the coupon code.</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                        <div class="row">
+                            <h4>No Products Found!</h4>
+                        </div>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>    
+            </div>
+            <input type="hidden" name="token" value="{{ csrf_token('place_order') }}" />
+        </form>
+        <div class="row mt-2 col-12 checkout-action-box">
+            <a href="#" id="place-order" class="btn btn-secondary">Place Order</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome to Books Store{% endblock %}</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="navbar col-12 navbar-expand-sm bg-dark navbar-dark">
+            <!-- Brand/logo -->
+            <a class="navbar-brand col-2" href="/"><b>Books Store</b></a>    
+            <!-- Links -->
+            <ul class="navbar-nav col-8">
+                <li class="nav-item">
+                    <a class="nav-link category-link" href="/categories"><b>Categories</b></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav col-2">
+                <li class="nav-item">
+                    <a class="nav-link cart-link" id="cart-link" data-token="{{ csrf_token('cart') }}" href="/cart">
+                        Cart $<span class="nav-total-cart-amount">(0.00)</span> 
+                        <span class="nav-total-cart-qty">(0)</span> Books 
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="d-none alert alert-success">
+        </div>
+        <div class="d-none alert alert-danger">
+        </div>
+
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+
+        <!-- Footer -->
+        <footer class="page-footer font-small special-color-dark pt-4">
+          <!-- Copyright -->
+          <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="/"> BooksStore.com</a>
+          </div>
+          <!-- Copyright -->
+        </footer>
+
+    </body>
+</html>

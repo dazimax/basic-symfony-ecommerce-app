@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Books Store{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="container">
+    <div class="row mt-5 justify-content-center">
+        <h2>Books Store</h2>
+    </div>
+    <div class="row col-12">
+        <div class="col-lg-12 mt-1 col-sm-12">
+            <div class="row justify-content-center">
+            {% for product in products %}
+                <div class="card box-shadow box-book mb-3 col-lg-3 col-sm-12">
+                    <div class="row no-gutters">
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <div class="row justify-content-center">
+                                    <a href="{{ path('product_show', {'id': product.id}) }}">
+                                        <img src="/images/books/{{ product.bookImage }}" class="card-img" alt="{{ product.bookName }}">
+                                    </a>
+                                </div>
+                                <div class="row book-content">
+                                    <a href="{{ path('product_show', {'id': product.id}) }}">
+                                        <h3 class="card-title">{{ product.bookName }}</h3>
+                                    </a>
+                                    <p class="card-text">
+                                        Book by {{ product.bookAuthor }} <br/>
+                                        <b>Price ${{ product.bookPrice }}</b>
+                                    </p>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="input-group mb-1 mt-1 col-10">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Quantity</span>
+                                        </div>
+                                        <input value="1" type="text" name="qty" class="form-control book-qty" placeholder="Book Qty" aria-describedby="basic-addon1" />
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <a data-token="{{ csrf_token(product.id) }}" class="add-to-cart-button btn btn-secondary" data-id="{{ product.id }}" href="#">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+            <div class="row">
+                <h4>No Products Found!</h4>
+            </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>    
+</div>
+{% endblock %}

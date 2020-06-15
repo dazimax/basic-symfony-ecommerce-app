@@ -1,0 +1,147 @@
+@import "~bootstrap/scss/bootstrap";
+body {
+    background-color: whitesmoke; 
+}
+/* default styles */
+.box-shadow {
+    -webkit-box-shadow: 2px 4px 5px 1px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow:    2px 4px 5px 1px #ccc;  /* Firefox 3.5 - 3.6 */
+    box-shadow:         2px 4px 5px 1px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.box-book {
+    margin: 10px;
+}
+
+.book-content .card-title{
+    min-height: 100px;
+    margin-top: 5px;
+}
+
+.book-content .card-text{
+    min-height: 40px;
+}
+
+.book-content a {
+    text-decoration: none;
+    color: #343a40;
+}
+
+.book-content a:hover {
+    text-decoration: none;
+    color: #343a40;
+}
+
+.box-book .card-body img{
+    min-height: 350px;
+}
+
+.add-to-cart-button {
+    margin-top: 10px;
+}
+
+.footer-copyright {
+    background-color: #343a40 !important;
+    color: white;
+}
+
+.category-link {
+    color: white !important;
+}
+
+.category-title {
+    text-decoration: none;
+    color: #343a40;
+}
+
+.category-title:hover {
+    text-decoration: none;
+    color: #343a40;
+}
+
+.container {
+    min-height: 500px;
+}
+
+.book-details {
+    display: flex;
+}
+
+.alert {
+    text-align: center;
+}
+
+.cart-link {
+    color: white !important;
+}
+
+.nav-total-cart-amount {
+    font-weight: bold;
+}
+
+.nav-total-cart-qty {
+    font-weight: bold;
+}
+
+/* Cart */
+
+.cart-item .card-body {
+    display: flex;
+    align-items: center;
+}
+
+.cart-item .img-thumbnail {
+    max-width: 60% !important;
+}
+
+.cart-book-title, .cart-book-title:hover {
+    text-decoration: none;
+    color: #343a40;
+}
+
+.cart-item-header label {
+    font-weight: bold;
+}
+
+.cart-item .summary-details {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cart-item .summary-title {
+    text-align: right;
+}
+
+.cart-item .summary-amount {
+    text-align: right;
+}
+
+.no-padding-top {
+    padding-top: 0 !important;
+}
+
+.no-padding-bottom {
+    padding-bottom: 0 !important;
+}
+
+.summary-actions {
+    justify-content: flex-end;
+}
+
+/* Checkout */
+
+#checkout-form {
+    display: flex;
+}
+
+.checkout-action-box, .summary-coupon {
+    justify-content: center;
+}
+
+.cart-coupon-remove-button {
+    font-size: 14px;
+}
+
+.red {
+    color: red;
+}
